@@ -1,5 +1,7 @@
 # Breaking Bad Api React App
 
+![appogImage](src/img/siteogIMage.jpg)
+
 React Project that uses [breaking bad api](https://breakingbadapi.com/documentation) to show and filter the cast of the show.
 
 This project was built following [Brad Traversy's](https://github.com/bradtraversy) [YouTube](https://www.youtube.com/watch?v=YaioUnMw0mo&ab_channel=TraversyMedia) tutorial.
