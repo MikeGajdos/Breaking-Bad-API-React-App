@@ -8,9 +8,11 @@ const CharacterGrid = ({ items, isLoading }) => {
     <Spinner />
   ) : (
     <section className="cards">
-      {items.map((item) => (
-        <CharacterItem key={item.char_id} item={item} />
-      ))}
+      {items.length > 0 ? (
+        items.map((item) => <CharacterItem key={item.char_id} item={item} />)
+      ) : (
+        <div>NO character with that name</div>
+      )}
     </section>
   );
 };

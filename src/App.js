@@ -7,25 +7,34 @@ import Search from "./components/UI/Search";
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchItems = async () => {
-      const result = await axios(
-        `https://www.breakingbadapi.com/api/characters?name=${query}`
-      );
-      console.log(result.data);
-      setItems(result.data);
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const result = await axios(
+          `https://www.breakingbadapi.com/api/characters?name=${search}`
+        );
+        setItems(result.data);
+      } catch (error) {
+        setIsError(true);
+      }
       setIsLoading(false);
     };
+
     fetchItems();
-  }, [query]);
+  }, [search]);
 
   return (
     <div className="container">
       <Header />
-      <Search getQuery={(q) => setQuery(q)} />
+      <Search getQuery={(q) => setQuery(q)} getSearch={(s) => setSearch(s)} />
+      {isError && <div> Something went wrong ...</div>}
       <CharacterGrid isLoading={isLoading} items={items} />
     </div>
   );
