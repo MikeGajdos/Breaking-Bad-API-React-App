@@ -11,6 +11,7 @@ const Search = ({ getQuery, getSearch }) => {
   return (
     <section className="search">
       <form
+        className="form"
         onSubmit={(event) => {
           getSearch(text);
           event.preventDefault();
