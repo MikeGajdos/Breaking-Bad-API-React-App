@@ -5,10 +5,11 @@ import Header from "./components/UI/Header";
 import CharacterGrid from "./components/characters/CharacterGrid";
 import Search from "./components/UI/Search";
 import Pagination from "./components/pagination/Pagination";
+import Spinner from "./components/UI/Spinner";
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState("");
   const [isError, setIsError] = useState(false);
@@ -24,19 +25,28 @@ const App = () => {
           `https://www.breakingbadapi.com/api/characters?name=${search}`
         );
         setItems(result.data);
+        setQuery("");
+        setIsLoading(false);
       } catch (error) {
         setIsError(true);
       }
-      setIsLoading(false);
     };
 
     fetchItems();
   }, [search]);
 
+  const handleChange = (q) => {
+    setQuery(q);
+  };
+  const handleSearch = () => {
+    setSearch(query);
+    setCurrentPage(1);
+  };
+
   // Get current posts
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLastItem = currentPage * itemsPerPage; // 16
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage; // 8
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem); // items.slice(8,16)
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -44,9 +54,18 @@ const App = () => {
   return (
     <div className="container">
       <Header />
-      <Search getQuery={(q) => setQuery(q)} getSearch={(s) => setSearch(s)} />
+      <Search
+        handleChange={handleChange}
+        handleSearch={handleSearch}
+        inputText={query}
+      />
       {isError && <div> Something went wrong ...</div>}
-      <CharacterGrid isLoading={isLoading} items={currentItems} />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <CharacterGrid isLoading={isLoading} items={currentItems} />
+      )}
+
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={items.length}

@@ -2,8 +2,8 @@ import React from "react";
 import CharacterItem from "./CharacterItem";
 import Spinner from "../UI/Spinner";
 
-console.log("what the fuck");
 const CharacterGrid = ({ items, isLoading }) => {
+  console.log(items);
   return isLoading ? (
     <Spinner />
   ) : (
