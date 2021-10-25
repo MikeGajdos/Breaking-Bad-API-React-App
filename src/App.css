@@ -26,6 +26,9 @@ ul {
   max-width: 1100px;
   margin: auto;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .btn {
@@ -62,6 +65,9 @@ header img {
   margin: auto;
   display: flex;
   justify-content: center;
+}
+.pagination {
+  gap: 0.5rem;
 }
 
 input[type="text"] {

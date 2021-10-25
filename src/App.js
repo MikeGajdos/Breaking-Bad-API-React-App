@@ -44,15 +44,16 @@ const App = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <CharacterGrid isLoading={isLoading} items={currentItems} />
+        <>
+          <CharacterGrid isLoading={isLoading} items={currentItems} />
+          <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={items.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
+        </>
       )}
-
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={items.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
     </div>
   );
 };
