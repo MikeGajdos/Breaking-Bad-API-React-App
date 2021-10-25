@@ -8,16 +8,24 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
   return (
     <nav>
       <ul className="pagination">
-        {pageNumbers.map((number) => (
-          <li
-            key={number}
-            className={`page-item ${currentPage === number ? "active" : null}`}
-          >
-            <a onClick={() => paginate(number)} href="!#" className="page-link">
-              {number}
-            </a>
-          </li>
-        ))}
+        {pageNumbers.length > 1
+          ? pageNumbers.map((number) => (
+              <li
+                key={number}
+                className={`page-item ${
+                  currentPage === number ? "active" : null
+                }`}
+              >
+                <a
+                  onClick={() => paginate(number)}
+                  href="!#"
+                  className="page-link"
+                >
+                  {number}
+                </a>
+              </li>
+            ))
+          : null}
       </ul>
     </nav>
   );
