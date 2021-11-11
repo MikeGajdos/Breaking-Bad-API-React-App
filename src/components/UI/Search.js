@@ -1,23 +1,31 @@
 import { getSuggestedQuery } from "@testing-library/react";
 import React, { useState } from "react";
 
-const Search = ({ getQuery }) => {
-  const [text, setText] = useState("");
-  const onChange = (q) => {
-    setText(q);
-    getQuery(q);
+const Search = ({ handleSearch, handleChange, inputText }) => {
+  const handleChangeHandler = (e) => {
+    let cunt = e.target.value;
+    handleChange(cunt);
   };
   return (
     <section className="search">
-      <form>
+      <form
+        className="form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleSearch(inputText);
+        }}
+      >
         <input
           type="text"
           className="form-control"
           placeholder="Search characters"
-          value={text}
-          onChange={(e) => onChange(e.target.value)}
+          value={inputText}
+          onChange={handleChangeHandler}
           autoFocus
         />
+        <button type="submit" className="btn">
+          Search<sup>S</sup>
+        </button>
       </form>
     </section>
   );
