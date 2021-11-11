@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./App.css";
 import Header from "./components/UI/Header";
 import CharacterGrid from "./components/characters/CharacterGrid";
@@ -11,6 +10,7 @@ import { useDataFetch } from "./useDataFetch";
 const App = () => {
   const [query, setQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  // const [currentItems, setCurrentItems] = useState([]);
   const [itemsPerPage] = useState(8);
   const [{ items, isLoading, isError, search }, setSearch] =
     useDataFetch(query);
@@ -23,6 +23,12 @@ const App = () => {
     setCurrentPage(1);
     setQuery("");
   };
+
+  // useEffect(() => {
+  //   const indexOfLastItem = currentPage * itemsPerPage; // 16
+  //   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // 8
+  //   setCurrentItems(items.slice(indexOfFirstItem, indexOfLastItem)); // items.slice(8,16)
+  // }, [currentPage, items, itemsPerPage]);
 
   // Get current posts
   const indexOfLastItem = currentPage * itemsPerPage; // 16
@@ -45,7 +51,7 @@ const App = () => {
         <Spinner />
       ) : (
         <>
-          <CharacterGrid isLoading={isLoading} items={currentItems} />
+          <CharacterGrid items={currentItems} />
           <Pagination
             itemsPerPage={itemsPerPage}
             totalItems={items.length}

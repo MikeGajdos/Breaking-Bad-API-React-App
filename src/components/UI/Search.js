@@ -23,7 +23,9 @@ const Search = ({ handleSearch, handleChange, inputText }) => {
           onChange={handleChangeHandler}
           autoFocus
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="btn">
+          Search<sup>S</sup>
+        </button>
       </form>
     </section>
   );

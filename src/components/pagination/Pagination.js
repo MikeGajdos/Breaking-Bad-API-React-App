@@ -22,6 +22,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
                   className="page-link"
                 >
                   {number}
+                  <sup>{number}</sup>
                 </a>
               </li>
             ))
